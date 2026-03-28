@@ -1,0 +1,22 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # Convert integers to strings
+        nums = list(map(str, nums))
+        
+        # Custom comparator
+        def compare(a: str, b: str) -> int:
+            if a + b > b + a:
+                return -1
+            elif a + b < b + a:
+                return 1
+            else:
+                return 0
+        
+        # Sort using custom comparator
+        nums.sort(key=cmp_to_key(compare))
+        
+        # Join the result
+        result = ''.join(nums)
+        
+        # Handle edge case (e.g., [0,0] -> "0")
+        return "0" if result[0] == "0" else result
